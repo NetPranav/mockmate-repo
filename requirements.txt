@@ -26,7 +26,7 @@ PyMuPDF==1.25.3
 # Uncomment above if you want local Whisper STT
 
 # Utilities
-pydantic==2.10.4
+pydantic[email]==2.10.4
 pydantic-settings==2.7.1
 aiofiles==24.1.0
 python-jose[cryptography]==3.3.0
