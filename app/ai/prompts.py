@@ -132,12 +132,9 @@ Provide your evaluation and the next question. Return a JSON object with EXACTLY
         "overall": 7.1
     }},
     "feedback": {{
-        "strengths": ["strength1", "strength2"],
-        "weaknesses": ["weakness1"],
-        "missing_concepts": ["concept1"],
-        "communication_feedback": "Feedback on how they communicated their answer",
-        "improvement_suggestions": ["suggestion1", "suggestion2"],
-        "ideal_answer": "A brief ideal answer for this question"
+        "strengths": ["One brief strength (max 10 words)"],
+        "weaknesses": ["One brief weakness (max 10 words)"],
+        "ideal_answer": "One very short sentence explaining the ideal answer"
     }},
     "next_question": {{
         "text": "The next interview question based on this answer and the candidate's profile",
@@ -151,6 +148,8 @@ Provide your evaluation and the next question. Return a JSON object with EXACTLY
 }}
 
 CRITICAL INSTRUCTION: The scores in the JSON structure above (7.5, 6.0, 8.0, 7.0, 7.1) are ONLY EXAMPLES. You MUST NOT hardcode or blindly copy these exact numbers. You MUST honestly and accurately evaluate the user's specific answer against the question and provide REAL calculated scores based on the guidelines below.
+
+SPEED OPTIMIZATION: Keep ALL text fields extremely brief. Do not exceed the length limits specified. The goal is to return the response as fast as possible.
 
 Score guidelines (1-10 scale):
 - 1-3: Poor/inadequate
