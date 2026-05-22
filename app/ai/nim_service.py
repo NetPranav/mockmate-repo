@@ -158,7 +158,12 @@ class NIMService:
                 return content
 
             except httpx.HTTPStatusError as e:
-                logger.error(f"NIM API error (attempt {attempt + 1}): {e.response.status_code} - {e.response.text[:200]}")
+                status = e.response.status_code
+                logger.error(f"NIM API error (attempt {attempt + 1}): {status} - {e.response.text[:200]}")
+                # Fail fast on auth errors, no point retrying
+                if status in (401, 403):
+                    raise ValueError(f"NVIDIA API Key is missing or invalid (HTTP {status}). Please check your environment variables.")
+                    
                 if attempt < self._retry_attempts - 1:
                     await asyncio.sleep(self._retry_delay * (2 ** attempt))
                 else:
