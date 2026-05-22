@@ -30,7 +30,7 @@ def extract_text_from_pdf(file_path: str) -> str:
         return text.strip()
     except Exception as e:
         logger.error(f"Error extracting text from PDF: {e}")
-        return ""
+        raise ValueError(f"PDF Extraction Error: {str(e)}")
 
 
 def extract_text_from_docx(file_path: str) -> str:
@@ -41,7 +41,7 @@ def extract_text_from_docx(file_path: str) -> str:
         return "\n".join(paragraphs)
     except Exception as e:
         logger.error(f"Error extracting text from DOCX: {e}")
-        return ""
+        raise ValueError(f"DOCX Extraction Error: {str(e)}")
 
 
 def extract_text(file_path: str, file_type: str) -> str:

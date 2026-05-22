@@ -42,9 +42,12 @@ async def upload_resume(
     file_path, file_type = save_upload(content, file.filename)
 
     # Extract text
-    raw_text = extract_text(file_path, file_type)
-    if not raw_text:
-        raise HTTPException(status_code=400, detail="Could not extract text from file")
+    try:
+        raw_text = extract_text(file_path, file_type)
+        if not raw_text:
+            raise HTTPException(status_code=400, detail="Document appears to be empty or is an image-based scan. Please upload a text-based PDF or DOCX.")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     # Parse with AI
     parsed_data = await parse_resume_with_ai(raw_text)
